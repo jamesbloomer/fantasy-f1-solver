@@ -224,7 +224,7 @@ func outQualifyTeamMatePoints(qualiPosition, teamMateQualiPosition int) int {
 
 func positionsGainedPoints(gridPosition, finishingPosition int) int {
 	if finishingPosition < gridPosition {
-		return gridPosition - finishingPosition
+		return (gridPosition - finishingPosition) * 3
 	}
 
 	return 0

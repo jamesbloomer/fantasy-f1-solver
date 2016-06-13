@@ -6,8 +6,15 @@ import (
 
 func TestPositionsGainedPointsPositive(t *testing.T) {
 	r := positionsGainedPoints(2, 1)
-	if r != 1 {
-		t.Error("Expected 1 got", r)
+	if r != 3 {
+		t.Error("Expected 3 got", r)
+	}
+}
+
+func TestPositionsGainedPointsPositive2(t *testing.T) {
+	r := positionsGainedPoints(3, 1)
+	if r != 6 {
+		t.Error("Expected 6 got", r)
 	}
 }
 
@@ -34,8 +41,8 @@ func TestOutQualifyTeamMatePointsNegative(t *testing.T) {
 
 func TestCalculatePoints(t *testing.T) {
 	r := calculatePoints(2, 1, 3)
-	if r != 31 {
-		t.Error("Expected 31 got", r)
+	if r != 33 {
+		t.Error("Expected 33 got", r)
 	}
 }
 
