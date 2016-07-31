@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sort"
 	"strconv"
 )
 
@@ -20,6 +21,18 @@ type Driver struct {
 	Cost   int
 	Points int
 }
+
+type ByPointsDriver []Driver
+
+func (d ByPointsDriver) Len() int           { return len(d) }
+func (d ByPointsDriver) Swap(i, j int)      { d[i], d[j] = d[j], d[i] }
+func (d ByPointsDriver) Less(i, j int) bool { return d[i].Points < d[j].Points }
+
+type ByPointsTeam []Team
+
+func (d ByPointsTeam) Len() int           { return len(d) }
+func (d ByPointsTeam) Swap(i, j int)      { d[i], d[j] = d[j], d[i] }
+func (d ByPointsTeam) Less(i, j int) bool { return d[i].Points < d[j].Points }
 
 var mer = Team{"Mercedes", 24, 0}
 var fer = Team{"Ferrari", 20, 0}
@@ -126,7 +139,19 @@ func main() {
 		}
 	}
 
-	fmt.Println("Best combination:")
+	sort.Sort(ByPointsDriver(drivers))
+	fmt.Println("Total score per driver:")
+	for _, driver := range drivers {
+		fmt.Println(driver.Name, driver.Points)
+	}
+
+	sort.Sort(ByPointsTeam(teams))
+	fmt.Println("\nTotal score per team:")
+	for _, team := range teams {
+		fmt.Println(team.Name, team.Points)
+	}
+
+	fmt.Println("\nBest combination:")
 	fmt.Println("Driver 1:", bestFF1Team.Drivers[0].Name)
 	fmt.Println("Driver 2:", bestFF1Team.Drivers[1].Name)
 	fmt.Println("Driver 3:", bestFF1Team.Drivers[2].Name)
